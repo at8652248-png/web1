@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy Store 1</title>
+    <!-- Basic SEO meta tags for searchability -->
+    <meta name="description" content="Dummy Store 1 - Your go-to dummy site for clothing sales. Browse and shop stylish clothes online.">
+    <meta name="keywords" content="dummy store, clothes, clothing, fashion, online shop">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .header-left { flex: 1; }
+        .header-right { display: flex; gap: 10px; }
+        nav { margin-top: 10px; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .product { border: 1px solid #ddd; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer; transition: box-shadow 0.3s; }
+        .product:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .product img { max-width: 100%; height: 200px; object-fit: cover; }
+        .reviews { margin-top: 10px; font-size: 14px; color: #666; }
+        .stars { color: #ffc107; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #218838; }
+        .remove-btn { background-color: #dc3545; margin-left: 10px; }
+        .remove-btn:hover { background-color: #c82333; }
+        /* Modal styles for cart, login, and product details */
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 8px; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+        #cart-items { list-style: none; padding: 0; }
+        #cart-items li { display: flex; align-items: center; margin-bottom: 10px; }
+        #cart-items img { width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 4px; }
+        form { display: flex; flex-direction: column; max-width: 400px; }
+        input, button { margin: 5px 0; padding: 10px; }
+        .product-detail img { max-width: 100%; height: 300px; object-fit: cover; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Dummy Store 1</h1>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#cart" onclick="openCart()">Cart</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            <button onclick="openLoginModal()">Sign In</button>
+            <button onclick="openLoginModal()">Log In</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="products">
+            <h2>Our Clothes</h2>
+            <div class="products">
+                <div class="product" onclick="openProductModal('Cool T-Shirt', 'A stylish graphic T-shirt perfect for casual wear. Made from soft cotton for comfort.', 1599, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=250&h=200&fit=crop', '★★★★☆ (4.5/5) - Great fit and design! - John D. | ★★★★☆ (4/5) - Comfortable but fades after wash. - Sarah K.')">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=250&h=200&fit=crop" alt="Cool T-Shirt - Graphic design on a white background">
+                    <h3>Cool T-Shirt</h3>
+                    <p>₹1599</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★☆ (4.5/5)</div>
+                        <p>"Great fit and design!" - John D.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Cool T-Shirt', 1599, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <div class="product" onclick="openProductModal('Stylish Jeans', 'High-quality denim jeans with a modern fit. Durable and versatile for any occasion.', 3999, 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=250&h=200&fit=crop', '★★★★★ (5/5) - Perfect fit and quality! - Emma R. | ★★★★☆ (4/5) - A bit stiff at first. - Mike T.')">
+                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=250&h=200&fit=crop" alt="Stylish Jeans - Blue denim pants on a model">
+                    <h3>Stylish Jeans</h3>
+                    <p>₹3999</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★★ (5/5)</div>
+                        <p>"Perfect fit and quality!" - Emma R.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Stylish Jeans', 3999, 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <div class="product" onclick="openProductModal('Leather Jacket', 'Premium leather jacket with a sleek design. Ideal for a bold, edgy look.', 7199, 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=250&h=200&fit=crop', '★★★★☆ (4/5) - Looks amazing, great material! - Alex P. | ★★★☆☆ (3/5) - Runs a bit small. - Lisa S.')">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=250&h=200&fit=crop" alt="Leather Jacket - Black leather jacket hanging on a rack">
+                    <h3>Leather Jacket</h3>
+                    <p>₹7199</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★☆ (4/5)</div>
+                        <p>"Looks amazing, great material!" - Alex P.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Leather Jacket', 7199, 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <!-- New Turbans -->
+                <div class="product" onclick="openProductModal('Red Turban', 'Traditional red turban made from fine fabric. Perfect for cultural events.', 899, 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=250&h=200&fit=crop', '★★★★☆ (4/5) - Authentic and comfortable! - Raj M. | ★★★★☆ (4/5) - Good quality fabric. - Priya N.')">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=250&h=200&fit=crop" alt="Red Turban - Traditional red turban fabric">
+                    <h3>Red Turban</h3>
+                    <p>₹899</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★☆ (4/5)</div>
+                        <p>"Authentic and comfortable!" - Raj M.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Red Turban', 899, 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <div class="product" onclick="openProductModal('Blue Turban', 'Elegant blue turban with intricate design. A must-have for formal occasions.', 899, 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=250&h=200&fit=crop', '★★★★★ (5/5) - Beautiful craftsmanship! - Karan S. | ★★★★☆ (4/5) - Soft and durable. - Anjali V.')">
+                    <img src="https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=250&h=200&fit=crop" alt="Blue Turban - Elegant blue turban on a mannequin">
+                    <h3>Blue Turban</h3>
+                    <p>₹899</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★★ (5/5)</div>
+                        <p>"Beautiful craftsmanship!" - Karan S.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Blue Turban', 899, 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <!-- New Hoodies -->
+                <div class="product" onclick="openProductModal('Graphic Hoodie', 'Cozy hoodie with vibrant graphic print. Great for layering.', 2499, 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=250&h=200&fit=crop', '★★★★☆ (4/5) - Fun design and warm! - Zoe L. | ★★★★☆ (4/5) - Print holds up well. - Tom H.')">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=250&h=200&fit=crop" alt="Graphic Hoodie - Hoodie with colorful graphic print">
+                    <h3>Graphic Hoodie</h3>
+                    <p>₹2499</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★☆ (4/5)</div>
+                        <p>"Fun design and warm!" - Zoe L.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Graphic Hoodie', 2499, 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <div class="product" onclick="openProductModal('Plain Hoodie', 'Simple and versatile plain hoodie. Soft fabric for all-day comfort.', 1999, 'https://images.unsplash.com/photo-1506629905607-0b5b1b5b5b5b?w=250&h=200&fit=crop', '★★★★★ (5/5) - Super comfortable! - Mia W. | ★★★★☆ (4/5) - Perfect for everyday. - Jake B.')">
+                    <img src="https://images.unsplash.com/photo-1506629905607-0b5b1b5b5b5b?w=250&h=200&fit=crop" alt="Plain Hoodie - Simple plain gray hoodie">
+                    <h3>Plain Hoodie</h3>
+                    <p>₹1999</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★★ (5/5)</div>
+                        <p>"Super comfortable!" - Mia W.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Plain Hoodie', 1999, 'https://images.unsplash.com/photo-1506629905607-0b5b1b5b5b5b?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+                <div class="product" onclick="openProductModal('Zip Hoodie', 'Hoodie with full-zip front. Stylish and functional for any weather.', 2999, 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=250&h=200&fit=crop', '★★★★☆ (4/5) - Great zipper quality! - Noah C. | ★★★★☆ (4/5) - Keeps warm. - Ava D.')">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=250&h=200&fit=crop" alt="Zip Hoodie - Hoodie with zipper front">
+                    <h3>Zip Hoodie</h3>
+                    <p>₹2999</p>
+                    <div class="reviews">
+                        <div class="stars">★★★★☆ (4/5)</div>
+                        <p>"Great zipper quality!" - Noah C.</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); addToCart('Zip Hoodie', 2999, 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=250&h=200&fit=crop')">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Cart -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: ₹<span id="total">0</span></p>
+            <button onclick="checkout()">Proceed to Checkout</button>
+            <div id="checkout" style="display: none; margin-top: 20px;">
+                <h3>Checkout</h3>
+                <form id="checkoutForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone (optional)">
+                    <textarea name="address" placeholder="Address" required></textarea>
+                    <input type="hidden" name="cart" id="cartData">
+                    <input type="hidden" name="total" id="totalData">
+                    <button type="submit">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Login/Sign In -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Sign In / Log In</h2>
+            <form onsubmit="alert('Logged in! (This is a dummy site.)'); closeLoginModal(); return false;">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Submit</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="alert('Sign up feature not implemented yet.')">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Modal for Product Details -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProductModal()">&times;</span>
