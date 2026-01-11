@@ -12,31 +12,32 @@
         header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
         .header-left { flex: 1; }
         .header-right { display: flex; gap: 10px; }
-        nav { margin-top: 10px; }
+        nav { margin-top: 10px; display: flex; gap: 10px; }
         .nav-btn { background-color: #666; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; text-decoration: none; display: inline-block; }
         .nav-btn:hover { background-color: #555; }
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; }
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .product { border: 1px solid #ddd; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer; transition: box-shadow 0.3s; }
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        @media (max-width: 480px) { .products { grid-template-columns: repeat(2, 1fr); gap: 10px; } } /* Force 2 columns on very small screens */
+        .product { border: 1px solid #ddd; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; transition: box-shadow 0.3s; }
         .product:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .product img { max-width: 100%; height: 200px; object-fit: cover; }
-        .reviews { margin-top: 10px; font-size: 14px; color: #666; }
+        .product img { max-width: 100%; height: 150px; object-fit: cover; } /* Slightly smaller images for mobile */
+        .reviews { margin-top: 8px; font-size: 12px; color: #666; }
         .stars { color: #ffc107; }
-        button { background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 4px; }
+        button { background-color: #28a745; color: white; border: none; padding: 8px; cursor: pointer; border-radius: 4px; font-size: 14px; }
         button:hover { background-color: #218838; }
-        .remove-btn { background-color: #dc3545; margin-left: 10px; }
+        .remove-btn { background-color: #dc3545; margin-left: 5px; }
         .remove-btn:hover { background-color: #c82333; }
         /* Modal styles for cart, login, and product details */
         .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
-        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 400px; border-radius: 8px; }
-        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 15px; border: 1px solid #888; width: 90%; max-width: 400px; border-radius: 8px; }
+        .close { color: #aaa; float: right; font-size: 24px; font-weight: bold; }
         .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
         #cart-items { list-style: none; padding: 0; }
-        #cart-items li { display: flex; align-items: center; margin-bottom: 10px; }
-        #cart-items img { width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 4px; }
+        #cart-items li { display: flex; align-items: center; margin-bottom: 8px; }
+        #cart-items img { width: 40px; height: 40px; object-fit: cover; margin-right: 8px; border-radius: 4px; }
         form { display: flex; flex-direction: column; max-width: 400px; }
-        input, button { margin: 5px 0; padding: 10px; }
-        .product-detail img { max-width: 100%; height: 300px; object-fit: cover; margin-bottom: 15px; }
+        input, button { margin: 3px 0; padding: 8px; font-size: 14px; }
+        .product-detail img { max-width: 100%; height: 250px; object-fit: cover; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -44,9 +45,9 @@
         <div class="header-left">
             <h1>Dummy Store 1</h1>
             <nav>
-                <a href="#home" class="nav-btn">Home</a>
-                <a href="#products" class="nav-btn">Products</a>
-                <a href="#cart" class="nav-btn" onclick="openCart()">Cart</a>
+                <button class="nav-btn" onclick="scrollToSection('home')">Home</button>
+                <button class="nav-btn" onclick="scrollToSection('products')">Products</button>
+                <button class="nav-btn" onclick="openCart()">Cart</button>
             </nav>
         </div>
         <div class="header-right">
@@ -174,17 +175,4 @@
             <span class="close" onclick="closeSignInModal()">&times;</span>
             <h2>Sign In (Register)</h2>
             <form onsubmit="signIn(event)">
-                <input type="email" id="signInEmail" placeholder="Email" required>
-                <input type="password" id="signInPassword" placeholder="Password" required>
-                <button type="submit">Sign In</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal for Log In -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeLoginModal()">&times;</span>
-            <h2>Log In</h2>
-            <form onsubmit="logIn(event)">
-                <input type
+                <input type="email" id
